@@ -1,0 +1,153 @@
+<p-dialog
+  header="Grouped by hashtag"
+  [(visible)]="displayGroup"
+  [modal]="true"
+  [style]="{ width: '50%' }"
+  [maximizable]="true"
+>
+  <p-chart *ngIf="displayGroup" type="doughnut" [data]="data"></p-chart>
+</p-dialog>
+<p-dialog
+  header="Create a new task"
+  [(visible)]="display"
+  [modal]="true"
+  [style]="{ width: '35%', margin: '0 auto' }"
+>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-info"></i></span>
+        <input
+          type="text"
+          pInputText
+          placeholder="Description"
+          [(ngModel)]="description"
+        />
+      </div>
+    </div>
+
+    <div class="ui-g-6">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-clock"></i></span>
+        <input
+          type="number"
+          pInputText
+          placeholder="Number of hours"
+          [(ngModel)]="hour"
+        />
+      </div>
+    </div>
+
+    <div class="ui-g-6">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="text" pInputText placeholder="Tag" [(ngModel)]="hashtag" />
+      </div>
+    </div>
+
+    <div class="ui-g-12">
+      <div class="ui-inputgroup">
+        <span class="ui-inputgroup-addon"><i class="pi pi-list"></i></span>
+        <textarea
+          rows="5"
+          cols="30"
+          pInputTextarea
+          placeholder="Activities"
+          [(ngModel)]="activities"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-grid p-justify-center" style="margin-top: 5px">
+    <button
+      pButton
+      type="button"
+      label="Add"
+      class="ui-button-raised"
+      (click)="add(); display = false"
+    ></button>
+  </div>
+</p-dialog>
+
+<div class="container">
+  <h1 class="title">Trackrr</h1>
+  <hr />
+  <div class="flex-end">
+    <button
+      pButton
+      type="button"
+      label="Add task"
+      icon="pi pi-plus"
+      class="ui-button-success"
+      (click)="showDialog()"
+    ></button>
+  </div>
+  <div>
+    <h3>Select date</h3>
+    <p-calendar
+      [style]="{ height: '40px' }"
+      [inputStyle]="{ height: '40px', width: '400px', textAlign: 'center' }"
+      [(ngModel)]="date"
+      [showIcon]="true"
+      placeholder="{{ date }}"
+      dateFormat="MM dd yy, DD"
+      (click)="viewByDate()"
+    >
+    </p-calendar>
+  </div>
+
+  <p *ngIf="currentView.length === 0">
+    There are no tasks for this day!
+  </p>
+  <div class="tasks" *ngIf="currentView.length > 0">
+    <div class="flex-between">
+      <h3>Tasks:</h3>
+      <button
+        pButton
+        type="button"
+        label="Toggle view"
+        icon="pi pi-sort-alt"
+        (click)="showGroupDialog()"
+      ></button>
+    </div>
+    <p-card
+      *ngFor="let i of currentView; let idx = index"
+      [style]="{
+        margin: '8px auto',
+        borderLeft: '6px solid #ab2342'
+      }"
+    >
+      <div>
+        <div>
+          <div class="card-header">
+            <h3>{{ i.description }}</h3>
+            <button
+              pButton
+              type="button"
+              icon="pi pi-times"
+              class="ui-button-danger"
+              (click)="delete(idx)"
+            ></button>
+          </div>
+          <div class="ui-g ui-fluid">
+            <div class="ui-g-10">
+              <div class="activities">
+                Activities:
+                <ul>
+                  <li *ngFor="let activity of i.activities">{{ activity }}</li>
+                </ul>
+              </div>
+            </div>
+            <div
+              class="ui-g-2 p-grid p-dir-col p-justify-end p-align-end vertical-container card-footer"
+            >
+              <p>{{ i.hour }} hrs</p>
+              <p class="hashtag">#{{ i.hashtag }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>

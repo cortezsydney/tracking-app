@@ -1,0 +1,77 @@
+.container {
+  width: 50%;
+  height: 90vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+button {
+  height: 40px;
+}
+
+.tasks {
+  margin: 30px auto 0 auto;
+  text-align: left;
+  width: 80%;
+}
+
+.activities ul {
+  margin: 8px 0;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header button {
+  height: 30px;
+}
+
+.card-header h3 {
+  font-weight: bold;
+}
+
+.card-footer {
+  color: #707070;
+}
+
+.hashtag {
+  display: inline-block;
+  font-size: 1.1rem;
+  font-style: italic;
+  border-radius: 5px;
+}
